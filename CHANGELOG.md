@@ -7,6 +7,33 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.1] - 2025-01-16
+
+### Added
+- **New conversion tools** (10 additional tools):
+  - `convert_angle` - Convert between degrees, radians, arcmin, arcsec, turns, gons
+  - `convert_area` - Convert between square meter, acre, hectare, square foot, and more
+  - `convert_computer_data` - Convert between bits, bytes, KB, MB, GB, TB, PB, EB
+  - `convert_density` - Convert between kg/L, g/cm³, lb/gal, and specialized density units
+  - `convert_energy` - Convert between joule, kilowatt hour, calorie, BTU, electron volt, and more
+  - `convert_force` - Convert between newton, pound force, kilogram force, dyne, kip, and more
+  - `convert_power` - Convert between watt, horsepower, BTU/hour, and metric/electrical power units
+  - `convert_pressure` - Convert between pascal, bar, PSI, atmosphere, mmHg, and more
+  - `convert_speed` - Convert between m/s, mph, km/h, knots, Mach, speed of light, and more
+  - `convert_time` - Convert between seconds to millennia, including sub-second precision units
+- **Enhanced existing tools**:
+  - Expanded `convert_length` with astronomical, microscopic, and specialized units
+  - Expanded `convert_volume` with imperial variants, metric prefixes, and specialized units
+  - Enhanced `convert_temperature` with improved precision and validation
+- **Type safety improvements** with Pydantic Field annotations and Literal types for all units
+
+### Changed
+- **Breaking change**: Renamed `convert_weight` to `convert_mass`
+- **Enhanced `convert_mass`** with precious metals (carat, troy ounce), imperial (stone), and metric prefixes
+- **Improved server architecture** with better type hints and validation
+- **Updated tool organization** with cleaner imports and exports
+- **Enhanced documentation** with detailed tool descriptions, supported units, and examples
+
 ## [0.1.0] - 2025-07-16
 
 ### Added
