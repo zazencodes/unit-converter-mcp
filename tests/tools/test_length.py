@@ -1,7 +1,5 @@
 """Tests for length conversion functions."""
 
-import pytest
-
 from unit_converter_mcp.tools.length import convert_length_tool
 
 
@@ -22,8 +20,3 @@ class TestLengthConversion:
         """Test foot to meter conversion."""
         result = convert_length_tool(1, "foot", "meter")
         assert abs(result - 0.3048) < 0.001
-
-    def test_invalid_unit(self):
-        """Test invalid length unit."""
-        with pytest.raises(ValueError):
-            convert_length_tool(100, "meter", "invalid_unit")

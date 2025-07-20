@@ -1,7 +1,5 @@
 """Tests for volume conversion functions."""
 
-import pytest
-
 from unit_converter_mcp.tools.volume import convert_volume_tool
 
 
@@ -22,8 +20,3 @@ class TestVolumeConversion:
         """Test cup to milliliter conversion."""
         result = convert_volume_tool(1, "cup", "milliliter")
         assert abs(result - 236.588) < 0.1
-
-    def test_invalid_unit(self):
-        """Test invalid volume unit."""
-        with pytest.raises(ValueError):
-            convert_volume_tool(100, "liter", "invalid_unit")

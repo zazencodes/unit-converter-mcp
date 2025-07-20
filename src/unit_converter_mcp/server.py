@@ -1,135 +1,333 @@
 """Main MCP server using FastMCP."""
 
+from typing import Annotated, Literal, get_args
+
 from fastmcp import FastMCP
+from pydantic import Field
 
 from .tools import (
-    VALID_LENGTH_UNITS,
-    VALID_TEMPERATURE_UNITS,
-    VALID_VOLUME_UNITS,
-    VALID_WEIGHT_UNITS,
+    ANGLE_UNIT,
+    AREA_UNIT,
+    COMPUTER_DATA_UNIT,
+    DENSITY_UNIT,
+    ENERGY_UNIT,
+    FORCE_UNIT,
+    LENGTH_UNIT,
+    MASS_UNIT,
+    POWER_UNIT,
+    PRESSURE_UNIT,
+    SPEED_UNIT,
+    TEMPERATURE_UNIT,
+    TIME_UNIT,
+    VOLUME_UNIT,
+    convert_angle_tool,
+    convert_area_tool,
+    convert_computer_data_tool,
+    convert_density_tool,
+    convert_energy_tool,
+    convert_force_tool,
     convert_length_tool,
+    convert_mass_tool,
+    convert_power_tool,
+    convert_pressure_tool,
+    convert_speed_tool,
     convert_temperature_tool,
+    convert_time_tool,
     convert_volume_tool,
-    convert_weight_tool,
 )
+
+# Unit type literal for list_supported_units function
+UNIT_TYPE = Literal[
+    "angle",
+    "area",
+    "computer_data",
+    "density",
+    "energy",
+    "force",
+    "length",
+    "mass",
+    "power",
+    "pressure",
+    "speed",
+    "temperature",
+    "time",
+    "volume",
+]
 
 # Create the FastMCP server instance
 app: FastMCP = FastMCP("Unit Converter MCP Server")
 
 
 @app.tool()
-def convert_temperature(value: float, from_unit: str, to_unit: str) -> dict:
-    """Convert temperature between Celsius, Fahrenheit, and Kelvin.
-
-    Args:
-        value: The temperature value to convert
-        from_unit: Source unit (celsius, fahrenheit, kelvin)
-        to_unit: Target unit (celsius, fahrenheit, kelvin)
-
-    Returns:
-        Dictionary with original value, converted value, and units
-    """
-    try:
-        converted_value = convert_temperature_tool(value, from_unit, to_unit)
-        return {
-            "original_value": value,
-            "original_unit": from_unit,
-            "converted_value": converted_value,
-            "converted_unit": to_unit,
-            "conversion_type": "temperature",
-        }
-    except (ValueError, TypeError) as e:
-        return {"error": str(e)}
-
-
-@app.tool()
-def convert_length(value: float, from_unit: str, to_unit: str) -> dict:
-    """Convert length between various units.
-
-    Args:
-        value: The length value to convert
-        from_unit: Source unit (meter, kilometer, centimeter, millimeter, inch, foot, yard, mile)
-        to_unit: Target unit (meter, kilometer, centimeter, millimeter, inch, foot, yard, mile)
-
-    Returns:
-        Dictionary with original value, converted value, and units
-    """
-    try:
-        converted_value = convert_length_tool(value, from_unit, to_unit)
-        return {
-            "original_value": value,
-            "original_unit": from_unit,
-            "converted_value": converted_value,
-            "converted_unit": to_unit,
-            "conversion_type": "length",
-        }
-    except (ValueError, TypeError) as e:
-        return {"error": str(e)}
-
-
-@app.tool()
-def convert_weight(value: float, from_unit: str, to_unit: str) -> dict:
-    """Convert weight between various units.
-
-    Args:
-        value: The weight value to convert
-        from_unit: Source unit (kilogram, gram, pound, ounce, ton)
-        to_unit: Target unit (kilogram, gram, pound, ounce, ton)
-
-    Returns:
-        Dictionary with original value, converted value, and units
-    """
-    try:
-        converted_value = convert_weight_tool(value, from_unit, to_unit)
-        return {
-            "original_value": value,
-            "original_unit": from_unit,
-            "converted_value": converted_value,
-            "converted_unit": to_unit,
-            "conversion_type": "weight",
-        }
-    except (ValueError, TypeError) as e:
-        return {"error": str(e)}
-
-
-@app.tool()
-def convert_volume(value: float, from_unit: str, to_unit: str) -> dict:
-    """Convert volume between various units.
-
-    Args:
-        value: The volume value to convert
-        from_unit: Source unit (liter, milliliter, gallon, quart, pint, cup, fluid_ounce)
-        to_unit: Target unit (liter, milliliter, gallon, quart, pint, cup, fluid_ounce)
-
-    Returns:
-        Dictionary with original value, converted value, and units
-    """
-    try:
-        converted_value = convert_volume_tool(value, from_unit, to_unit)
-        return {
-            "original_value": value,
-            "original_unit": from_unit,
-            "converted_value": converted_value,
-            "converted_unit": to_unit,
-            "conversion_type": "volume",
-        }
-    except (ValueError, TypeError) as e:
-        return {"error": str(e)}
-
-
-@app.tool()
-def list_supported_units() -> dict:
-    """List all supported units for each conversion type.
-
-    Returns:
-        Dictionary with supported units for each conversion type
-    """
+def convert_temperature(
+    value: Annotated[float, Field(description="Temperature value to convert")],
+    from_unit: Annotated[TEMPERATURE_UNIT, Field(description="Source unit")],
+    to_unit: Annotated[TEMPERATURE_UNIT, Field(description="Target unit")],
+) -> dict:
+    """Convert temperature between units."""
+    converted_value = convert_temperature_tool(value, from_unit, to_unit)
     return {
-        "temperature": VALID_TEMPERATURE_UNITS,
-        "length": VALID_LENGTH_UNITS,
-        "weight": VALID_WEIGHT_UNITS,
-        "volume": VALID_VOLUME_UNITS,
+        "original_value": value,
+        "original_unit": from_unit,
+        "converted_value": converted_value,
+        "converted_unit": to_unit,
+        "conversion_type": "temperature",
     }
+
+
+@app.tool()
+def convert_angle(
+    value: Annotated[float, Field(description="Angle value to convert")],
+    from_unit: Annotated[ANGLE_UNIT, Field(description="Source unit")],
+    to_unit: Annotated[ANGLE_UNIT, Field(description="Target unit")],
+) -> dict:
+    """Convert angle between units."""
+    converted_value = convert_angle_tool(value, from_unit, to_unit)
+    return {
+        "original_value": value,
+        "original_unit": from_unit,
+        "converted_value": converted_value,
+        "converted_unit": to_unit,
+        "conversion_type": "angle",
+    }
+
+
+@app.tool()
+def convert_length(
+    value: Annotated[float, Field(description="Length value to convert")],
+    from_unit: Annotated[LENGTH_UNIT, Field(description="Source unit")],
+    to_unit: Annotated[LENGTH_UNIT, Field(description="Target unit")],
+) -> dict:
+    """Convert length between units."""
+    converted_value = convert_length_tool(value, from_unit, to_unit)
+    return {
+        "original_value": value,
+        "original_unit": from_unit,
+        "converted_value": converted_value,
+        "converted_unit": to_unit,
+        "conversion_type": "length",
+    }
+
+
+@app.tool()
+def convert_energy(
+    value: Annotated[float, Field(description="Energy value to convert")],
+    from_unit: Annotated[ENERGY_UNIT, Field(description="Source unit")],
+    to_unit: Annotated[ENERGY_UNIT, Field(description="Target unit")],
+) -> dict:
+    """Convert energy between units."""
+    converted_value = convert_energy_tool(value, from_unit, to_unit)
+    return {
+        "original_value": value,
+        "original_unit": from_unit,
+        "converted_value": converted_value,
+        "converted_unit": to_unit,
+        "conversion_type": "energy",
+    }
+
+
+@app.tool()
+def convert_force(
+    value: Annotated[float, Field(description="Force value to convert")],
+    from_unit: Annotated[FORCE_UNIT, Field(description="Source unit")],
+    to_unit: Annotated[FORCE_UNIT, Field(description="Target unit")],
+) -> dict:
+    """Convert force between units."""
+    converted_value = convert_force_tool(value, from_unit, to_unit)
+    return {
+        "original_value": value,
+        "original_unit": from_unit,
+        "converted_value": converted_value,
+        "converted_unit": to_unit,
+        "conversion_type": "force",
+    }
+
+
+@app.tool()
+def convert_pressure(
+    value: Annotated[float, Field(description="Pressure value to convert")],
+    from_unit: Annotated[PRESSURE_UNIT, Field(description="Source unit")],
+    to_unit: Annotated[PRESSURE_UNIT, Field(description="Target unit")],
+) -> dict:
+    """Convert pressure between units."""
+    converted_value = convert_pressure_tool(value, from_unit, to_unit)
+    return {
+        "original_value": value,
+        "original_unit": from_unit,
+        "converted_value": converted_value,
+        "converted_unit": to_unit,
+        "conversion_type": "pressure",
+    }
+
+
+@app.tool()
+def convert_power(
+    value: Annotated[float, Field(description="Power value to convert")],
+    from_unit: Annotated[POWER_UNIT, Field(description="Source unit")],
+    to_unit: Annotated[POWER_UNIT, Field(description="Target unit")],
+) -> dict:
+    """Convert power between units."""
+    converted_value = convert_power_tool(value, from_unit, to_unit)
+    return {
+        "original_value": value,
+        "original_unit": from_unit,
+        "converted_value": converted_value,
+        "converted_unit": to_unit,
+        "conversion_type": "power",
+    }
+
+
+@app.tool()
+def convert_speed(
+    value: Annotated[float, Field(description="Speed value to convert")],
+    from_unit: Annotated[SPEED_UNIT, Field(description="Source unit")],
+    to_unit: Annotated[SPEED_UNIT, Field(description="Target unit")],
+) -> dict:
+    """Convert speed between units."""
+    converted_value = convert_speed_tool(value, from_unit, to_unit)
+    return {
+        "original_value": value,
+        "original_unit": from_unit,
+        "converted_value": converted_value,
+        "converted_unit": to_unit,
+        "conversion_type": "speed",
+    }
+
+
+@app.tool()
+def convert_area(
+    value: Annotated[float, Field(description="Area value to convert")],
+    from_unit: Annotated[AREA_UNIT, Field(description="Source unit")],
+    to_unit: Annotated[AREA_UNIT, Field(description="Target unit")],
+) -> dict:
+    """Convert area between units."""
+    converted_value = convert_area_tool(value, from_unit, to_unit)
+    return {
+        "original_value": value,
+        "original_unit": from_unit,
+        "converted_value": converted_value,
+        "converted_unit": to_unit,
+        "conversion_type": "area",
+    }
+
+
+@app.tool()
+def convert_mass(
+    value: Annotated[float, Field(description="Weight value to convert")],
+    from_unit: Annotated[MASS_UNIT, Field(description="Source unit")],
+    to_unit: Annotated[MASS_UNIT, Field(description="Target unit")],
+) -> dict:
+    """Convert weight between units."""
+    converted_value = convert_mass_tool(value, from_unit, to_unit)
+    return {
+        "original_value": value,
+        "original_unit": from_unit,
+        "converted_value": converted_value,
+        "converted_unit": to_unit,
+        "conversion_type": "mass",
+    }
+
+
+@app.tool()
+def convert_volume(
+    value: Annotated[float, Field(description="Volume value to convert")],
+    from_unit: Annotated[VOLUME_UNIT, Field(description="Source unit")],
+    to_unit: Annotated[VOLUME_UNIT, Field(description="Target unit")],
+) -> dict:
+    """Convert volume between units."""
+    converted_value = convert_volume_tool(value, from_unit, to_unit)
+    return {
+        "original_value": value,
+        "original_unit": from_unit,
+        "converted_value": converted_value,
+        "converted_unit": to_unit,
+        "conversion_type": "volume",
+    }
+
+
+@app.tool()
+def convert_computer_data(
+    value: Annotated[float, Field(description="Computer storage value to convert")],
+    from_unit: Annotated[COMPUTER_DATA_UNIT, Field(description="Source unit")],
+    to_unit: Annotated[COMPUTER_DATA_UNIT, Field(description="Target unit")],
+) -> dict:
+    """Convert computer storage between units."""
+    converted_value = convert_computer_data_tool(value, from_unit, to_unit)
+    return {
+        "original_value": value,
+        "original_unit": from_unit,
+        "converted_value": converted_value,
+        "converted_unit": to_unit,
+        "conversion_type": "computer_data",
+    }
+
+
+@app.tool()
+def convert_density(
+    value: Annotated[float, Field(description="Density value to convert")],
+    from_unit: Annotated[DENSITY_UNIT, Field(description="Source unit")],
+    to_unit: Annotated[DENSITY_UNIT, Field(description="Target unit")],
+) -> dict:
+    """Convert density between units."""
+    converted_value = convert_density_tool(value, from_unit, to_unit)
+    return {
+        "original_value": value,
+        "original_unit": from_unit,
+        "converted_value": converted_value,
+        "converted_unit": to_unit,
+        "conversion_type": "density",
+    }
+
+
+@app.tool()
+def convert_time(
+    value: Annotated[float, Field(description="Time value to convert")],
+    from_unit: Annotated[TIME_UNIT, Field(description="Source unit")],
+    to_unit: Annotated[TIME_UNIT, Field(description="Target unit")],
+) -> dict:
+    """Convert time between units."""
+    converted_value = convert_time_tool(value, from_unit, to_unit)
+    return {
+        "original_value": value,
+        "original_unit": from_unit,
+        "converted_value": converted_value,
+        "converted_unit": to_unit,
+        "conversion_type": "time",
+    }
+
+
+@app.tool()
+def list_supported_units(
+    unit_type: Annotated[
+        UNIT_TYPE | None,
+        Field(
+            description="Specific unit type to get supported units for. If not specified, returns all supported units.",
+            default=None,
+        ),
+    ],
+) -> dict:
+    """List all supported units for each conversion type or for a specific type."""
+    all_units = {
+        "angle": get_args(ANGLE_UNIT),
+        "area": get_args(AREA_UNIT),
+        "computer_data": get_args(COMPUTER_DATA_UNIT),
+        "density": get_args(DENSITY_UNIT),
+        "energy": get_args(ENERGY_UNIT),
+        "force": get_args(FORCE_UNIT),
+        "temperature": get_args(TEMPERATURE_UNIT),
+        "length": get_args(LENGTH_UNIT),
+        "mass": get_args(MASS_UNIT),
+        "power": get_args(POWER_UNIT),
+        "pressure": get_args(PRESSURE_UNIT),
+        "speed": get_args(SPEED_UNIT),
+        "time": get_args(TIME_UNIT),
+        "volume": get_args(VOLUME_UNIT),
+    }
+
+    if unit_type is not None:
+        return {unit_type: all_units[unit_type]}
+
+    return all_units
 
 
 def main() -> None:

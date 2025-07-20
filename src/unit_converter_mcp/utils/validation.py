@@ -21,7 +21,7 @@ class Validator:
         if value < 0:
             raise ValueError(f"{self.name} must be non-negative, got {value}")
 
-    def validate_unit(self, unit: str, valid_units: list[str]) -> None:
+    def validate_unit(self, unit: str, valid_units: tuple[str]) -> None:
         """Validate that a unit is in the list of valid units."""
         if unit not in valid_units:
             raise ValueError(

@@ -165,6 +165,10 @@ cython_debug/
 .uv-cache/
 uv.lock
 
+# Mac
+.DS_Store
+
 # Dev files
 todo.md
 devlog.md
+digest.txt

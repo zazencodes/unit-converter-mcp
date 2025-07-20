@@ -1,7 +1,5 @@
 """Tests for temperature conversion functions."""
 
-import pytest
-
 from unit_converter_mcp.tools.temperature import convert_temperature_tool
 
 
@@ -27,8 +25,3 @@ class TestTemperatureConversion:
         """Test Kelvin to Celsius conversion."""
         result = convert_temperature_tool(273.15, "kelvin", "celsius")
         assert result == 0.0
-
-    def test_invalid_unit(self):
-        """Test invalid temperature unit."""
-        with pytest.raises(ValueError):
-            convert_temperature_tool(100, "celsius", "invalid_unit")

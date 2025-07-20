@@ -7,10 +7,37 @@ Unit conversion utilities that provide precise conversions between different uni
 | Tool                    | Purpose                                    | Supported Units |
 | ----------------------- | ------------------------------------------ | --------------- |
 | `convert_temperature`   | Convert temperature between units          | Celsius, Fahrenheit, Kelvin |
+| `convert_angle`         | Convert angle between units                | Degrees, Radians, Arcmin, Arcsec, Turns, Gons |
 | `convert_length`        | Convert length/distance between units      | Meter, Kilometer, Foot, Inch, Mile, etc. |
-| `convert_weight`        | Convert weight/mass between units          | Kilogram, Gram, Pound, Ounce, Ton |
+| `convert_area`          | Convert area between units                 | Square Meter, Acre, Hectare, Square Foot, etc. |
+| `convert_mass`          | Convert mass between units                 | Kilogram, Gram, Pound, Ounce, Ton |
 | `convert_volume`        | Convert volume between units               | Liter, Gallon, Cup, Fluid Ounce, etc. |
+| `convert_time`          | Convert time between units                 | Seconds, Minutes, Hours, Days, Years, etc. |
+| `convert_energy`        | Convert energy between units               | Joule, Kilowatt Hour, Calorie, BTU, etc. |
+| `convert_force`         | Convert force between units                | Newton, Pound Force, Kilogram Force, etc. |
+| `convert_pressure`      | Convert pressure between units             | Pascal, Bar, PSI, Atmosphere, etc. |
+| `convert_power`         | Convert power between units                | Watt, Horsepower, BTU per hour, etc. |
+| `convert_speed`         | Convert speed between units                | m/s, mph, km/h, knots, Mach, etc. |
+| `convert_computer_data` | Convert computer storage between units     | Bytes, KB, MB, GB, TB, etc. |
+| `convert_density`       | Convert density between units              | kg/L, g/cm³, lb/gal, g/L, etc. |
 | `list_supported_units`  | List all supported units for each type    | All conversion types |
+
+## 🔧 Examples
+
+Here are some example prompts to get you started:
+
+```text
+tell me what unit conversions you can do
+
+convert 0 celcius to F
+
+convert 3.14159 rads to degrees
+
+whats my weight in kg? I'm 205lbs
+
+if I spend 10,000 seconds practicing a skill non-stop, how many days is that?
+```
+
 
 ## 🔧 Setup
 
@@ -76,19 +103,25 @@ Convert length between various units including metric and imperial systems.
 }
 ```
 
-### `convert_weight`
+### `convert_mass`
 
-Convert weight/mass between various units.
+Convert mass between various units including metric, imperial, and specialized units.
 
 **Parameters:**
-- `value` (float): Weight value to convert
-- `from_unit` (str): Source unit (kilogram, gram, pound, ounce, ton)
-- `to_unit` (str): Target unit (kilogram, gram, pound, ounce, ton)
+- `value` (float): Mass value to convert
+- `from_unit` (str): Source unit (kilogram, gram, pound, ounce, tonne, carat, stone, etc.)
+- `to_unit` (str): Target unit (kilogram, gram, pound, ounce, tonne, carat, stone, etc.)
+
+**Supported Units:**
+- Metric: kilogram, gram, milligram, microgram, nanogram, picogram, femtogram, decagram, hectogram, tonne, kilotonne, megatonne
+- Imperial: pound, ounce, stone, short ton (US), long ton (UK)
+- Precious metals: troy ounce, carat
+- Historical: grain
 
 **Example:**
 ```json
 {
-  "name": "convert_weight",
+  "name": "convert_mass",
   "arguments": {
     "value": 1,
     "from_unit": "kilogram",
@@ -118,6 +151,108 @@ Convert volume between various units including metric and imperial systems.
 }
 ```
 
+### `convert_time`
+
+Convert time between various units from sub-seconds to millennia.
+
+**Parameters:**
+- `value` (float): Time value to convert
+- `from_unit` (str): Source unit (seconds, minutes, hours, days, weeks, months, years, etc.)
+- `to_unit` (str): Target unit (seconds, minutes, hours, days, weeks, months, years, etc.)
+
+**Example:**
+```json
+{
+  "name": "convert_time",
+  "arguments": {
+    "value": 1,
+    "from_unit": "hours",
+    "to_unit": "minutes"
+  }
+}
+```
+
+### `convert_energy`
+
+Convert energy between various units including metric, electrical, heat, nutrition, and particle physics systems.
+
+**Parameters:**
+- `value` (float): Energy value to convert
+- `from_unit` (str): Source unit (joule, kilowatt hour, calorie, Btu, etc.)
+- `to_unit` (str): Target unit (joule, kilowatt hour, calorie, Btu, etc.)
+
+**Supported Units:**
+- SI and metric prefixes: joule, kilojoule, megajoule, gigajoule, terajoule, petajoule, exajoule
+- Electrical-energy units: watt hour, kilowatt hour, megawatt hour, gigawatt hour, terawatt hour
+- Heat / nutrition: Btu, calorie, kilocalorie, therm
+- Mechanical & particle-physics units: foot‑pound force, inch‑pound force, erg, electron volt
+
+**Example:**
+```json
+{
+  "name": "convert_energy",
+  "arguments": {
+    "value": 1,
+    "from_unit": "kilowatt hour",
+    "to_unit": "joule"
+  }
+}
+```
+
+### `convert_force`
+
+Convert force between various units including metric and imperial systems.
+
+**Parameters:**
+- `value` (float): Force value to convert
+- `from_unit` (str): Source unit (newtons, pounds force, kilograms force, dynes, kilonewtons, kips, etc.)
+- `to_unit` (str): Target unit (newtons, pounds force, kilograms force, dynes, kilonewtons, kips, etc.)
+
+**Supported Units:**
+- Metric: newtons, kilonewtons, meganewtons, dynes
+- Imperial: pounds force, kips
+- Other: kilograms force, tonnes force, long tons force, short tons force
+
+**Example:**
+```json
+{
+  "name": "convert_force",
+  "arguments": {
+    "value": 100,
+    "from_unit": "newtons",
+    "to_unit": "pounds force"
+  }
+}
+```
+
+### `convert_density`
+
+Convert density between various units including metric, imperial, and specialized systems.
+
+**Parameters:**
+- `value` (float): Density value to convert
+- `from_unit` (str): Source unit (kilograms per liter, grams per cubic centimeter, pounds per gallon, etc.)
+- `to_unit` (str): Target unit (kilograms per liter, grams per cubic centimeter, pounds per gallon, etc.)
+
+**Supported Units:**
+- Grain-based hardness units: grains per gallon (UK), grains per gallon (US), grains per gallon
+- Metric staples: grams per cubic centimeter, grams per liter, kilograms per liter, kilograms per cubic meter, milligrams per liter
+- Fluid-ounce units: ounces per gallon (UK), ounces per gallon (US), ounces per gallon
+- Pound-based units: pounds per cubic foot, pounds per gallon (UK), pounds per gallon (US), pounds per gallon
+- Tonne/ton bulk-density units: tonnes per cubic meter, tons per cubic yard (UK), tons per cubic yard (US), tons per cubic yard
+
+**Example:**
+```json
+{
+  "name": "convert_density",
+  "arguments": {
+    "value": 1,
+    "from_unit": "kilograms per liter",
+    "to_unit": "grams per cubic centimeter"
+  }
+}
+```
+
 ### `list_supported_units`
 
 List all supported units for each conversion type.
@@ -129,6 +264,132 @@ List all supported units for each conversion type.
 {
   "name": "list_supported_units",
   "arguments": {}
+}
+```
+
+### `convert_angle`
+
+Convert angle between degrees, radians, and other angular units.
+
+**Parameters:**
+- `value` (float): Angle value to convert
+- `from_unit` (str): Source unit (degrees, radians, arcmin, arcsec, turns, gons)
+- `to_unit` (str): Target unit (degrees, radians, arcmin, arcsec, turns, gons)
+
+**Example:**
+```json
+{
+  "name": "convert_angle",
+  "arguments": {
+    "value": 3.14159,
+    "from_unit": "radians",
+    "to_unit": "degrees"
+  }
+}
+```
+
+### `convert_area`
+
+Convert area between various units including metric and imperial systems.
+
+**Parameters:**
+- `value` (float): Area value to convert
+- `from_unit` (str): Source unit (acre, are, hectare, square centimeter, square foot, square inch, square kilometer, square meter, square mile, square millimeter, square yard)
+- `to_unit` (str): Target unit (acre, are, hectare, square centimeter, square foot, square inch, square kilometer, square meter, square mile, square millimeter, square yard)
+
+**Example:**
+```json
+{
+  "name": "convert_area",
+  "arguments": {
+    "value": 1,
+    "from_unit": "hectare",
+    "to_unit": "acre"
+  }
+}
+```
+
+### `convert_computer_data`
+
+Convert computer storage between various units from bits to exabytes.
+
+**Parameters:**
+- `value` (float): Computer storage value to convert
+- `from_unit` (str): Source unit (bits, bytes, kilobytes, megabytes, gigabytes, terabytes, petabytes, exabytes)
+- `to_unit` (str): Target unit (bits, bytes, kilobytes, megabytes, gigabytes, terabytes, petabytes, exabytes)
+
+**Example:**
+```json
+{
+  "name": "convert_computer_data",
+  "arguments": {
+    "value": 1,
+    "from_unit": "gigabytes",
+    "to_unit": "megabytes"
+  }
+}
+```
+
+### `convert_pressure`
+
+Convert pressure between various units including metric, imperial, and specialized systems.
+
+**Parameters:**
+- `value` (float): Pressure value to convert
+- `from_unit` (str): Source unit (pascal, hectopascal, kilopascal, megapascal, bar, atmosphere, centimeters of water, inches of water, feet of water, meters of water, millimeters of mercury, inches of mercury, kilogram force per square centimeter, newtons per square centimeter, newtons per square millimeter, psi, psf)
+- `to_unit` (str): Target unit (pascal, hectopascal, kilopascal, megapascal, bar, atmosphere, centimeters of water, inches of water, feet of water, meters of water, millimeters of mercury, inches of mercury, kilogram force per square centimeter, newtons per square centimeter, newtons per square millimeter, psi, psf)
+
+**Example:**
+```json
+{
+  "name": "convert_pressure",
+  "arguments": {
+    "value": 1,
+    "from_unit": "atmosphere",
+    "to_unit": "psi"
+  }
+}
+```
+
+### `convert_power`
+
+Convert power between various units including mechanical, electrical, and thermal systems.
+
+**Parameters:**
+- `value` (float): Power value to convert
+- `from_unit` (str): Source unit (Btu per hour, foot pound‑force per second, ton of refrigeration, calorie per hour, kilocalorie per hour, horsepower, horsepower (metric), kilogram‑force meter per second, watt, kilowatt, megawatt, gigawatt, terawatt, petawatt)
+- `to_unit` (str): Target unit (Btu per hour, foot pound‑force per second, ton of refrigeration, calorie per hour, kilocalorie per hour, horsepower, horsepower (metric), kilogram‑force meter per second, watt, kilowatt, megawatt, gigawatt, terawatt, petawatt)
+
+**Example:**
+```json
+{
+  "name": "convert_power",
+  "arguments": {
+    "value": 1,
+    "from_unit": "horsepower",
+    "to_unit": "kilowatt"
+  }
+}
+```
+
+### `convert_speed`
+
+Convert speed between various units including metric, imperial, and specialized systems.
+
+**Parameters:**
+- `value` (float): Speed value to convert
+- `from_unit` (str): Source unit (centimeters per minute, centimeters per second, feet per hour, feet per minute, feet per second, inches per minute, inches per second, kilometers per hour, kilometers per second, knots, Mach (ISA sea level), speed of sound, meters per hour, meters per minute, meters per second, miles per hour, miles per minute, miles per second, yards per hour, yards per minute, yards per second, speed of light)
+- `to_unit` (str): Target unit (centimeters per minute, centimeters per second, feet per hour, feet per minute, feet per second, inches per minute, inches per second, kilometers per hour, kilometers per second, knots, Mach (ISA sea level), speed of sound, meters per hour, meters per minute, meters per second, miles per hour, miles per minute, miles per second, yards per hour, yards per minute, yards per second, speed of light)
+
+**Example:**
+```json
+{
+  "name": "convert_speed",
+  "arguments": {
+    "value": 60,
+    "from_unit": "miles per hour",
+    "to_unit": "meters per second"
+  }
 }
 ```
 
@@ -236,8 +497,3 @@ MIT License - see [LICENSE](LICENSE) file for details.
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
-## 📚 Links
-
-- [Model Context Protocol](https://modelcontextprotocol.io/)
-- [FastMCP Documentation](https://github.com/jlowin/fastmcp)
-- [Python unit conversion libraries](https://docs.python.org/3/library/)
