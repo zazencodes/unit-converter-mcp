@@ -304,17 +304,17 @@ def convert_batch(
         Field(
             description="List of conversion requests. Each request should contain: value (float), from_unit (str), to_unit (str), conversion_type (str), and optionally request_id (str)"
         ),
-    ]
+    ],
 ) -> dict:
     """Perform multiple unit conversions in a single batch request.
-    
+
     Each request in the batch should contain:
     - value: The numeric value to convert
-    - from_unit: Source unit for conversion  
+    - from_unit: Source unit for conversion
     - to_unit: Target unit for conversion
     - conversion_type: Type of conversion (temperature, length, mass, etc.)
     - request_id: Optional identifier for tracking individual requests
-    
+
     Returns a structured response with individual results for each conversion,
     including success/failure status and either converted values or error messages.
     """
@@ -330,7 +330,7 @@ def convert_batch(
             "total_requests": len(requests),
             "successful_conversions": successful,
             "failed_conversions": failed,
-        }
+        },
     }
 
 

@@ -2,6 +2,7 @@
 
 from .angle import ANGLE_UNIT, convert_angle_tool
 from .area import AREA_UNIT, convert_area_tool
+from .batch import CONVERSION_TYPE, convert_batch_tool
 from .computer import COMPUTER_DATA_UNIT, convert_computer_data_tool
 from .density import DENSITY_UNIT, convert_density_tool
 from .energy import ENERGY_UNIT, convert_energy_tool
@@ -18,6 +19,7 @@ from .volume import VOLUME_UNIT, convert_volume_tool
 __all__ = [
     "convert_angle_tool",
     "convert_area_tool",
+    "convert_batch_tool",
     "convert_computer_data_tool",
     "convert_density_tool",
     "convert_energy_tool",
@@ -33,6 +35,7 @@ __all__ = [
     "ANGLE_UNIT",
     "AREA_UNIT",
     "COMPUTER_DATA_UNIT",
+    "CONVERSION_TYPE",
     "DENSITY_UNIT",
     "ENERGY_UNIT",
     "FORCE_UNIT",

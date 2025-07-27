@@ -1,6 +1,5 @@
 """Tests for batch conversion functions."""
 
-
 from unit_converter_mcp.tools.batch import convert_batch_tool
 
 
@@ -15,7 +14,7 @@ class TestBatchConversion:
                 "from_unit": "celsius",
                 "to_unit": "fahrenheit",
                 "conversion_type": "temperature",
-                "request_id": "temp_1"
+                "request_id": "temp_1",
             }
         ]
 
@@ -39,22 +38,22 @@ class TestBatchConversion:
                 "from_unit": "celsius",
                 "to_unit": "kelvin",
                 "conversion_type": "temperature",
-                "request_id": "temp_1"
+                "request_id": "temp_1",
             },
             {
                 "value": 1000,
                 "from_unit": "meter",
                 "to_unit": "kilometer",
                 "conversion_type": "length",
-                "request_id": "length_1"
+                "request_id": "length_1",
             },
             {
                 "value": 1000,
                 "from_unit": "gram",
                 "to_unit": "kilogram",
                 "conversion_type": "mass",
-                "request_id": "mass_1"
-            }
+                "request_id": "mass_1",
+            },
         ]
 
         results = convert_batch_tool(requests)
@@ -83,7 +82,7 @@ class TestBatchConversion:
                 "value": 32,
                 "from_unit": "fahrenheit",
                 "to_unit": "celsius",
-                "conversion_type": "temperature"
+                "conversion_type": "temperature",
             }
         ]
 
@@ -104,7 +103,7 @@ class TestBatchConversion:
                 "from_unit": "celsius",
                 "to_unit": "fahrenheit",
                 "conversion_type": "temperature",
-                "request_id": "temp_1"
+                "request_id": "temp_1",
             }
         ]
 
@@ -121,7 +120,7 @@ class TestBatchConversion:
                 "value": 100,
                 "to_unit": "fahrenheit",
                 "conversion_type": "temperature",
-                "request_id": "temp_2"
+                "request_id": "temp_2",
             }
         ]
 
@@ -140,7 +139,7 @@ class TestBatchConversion:
                 "from_unit": "celsius",
                 "to_unit": "fahrenheit",
                 "conversion_type": "invalid_type",
-                "request_id": "invalid_1"
+                "request_id": "invalid_1",
             }
         ]
 
@@ -159,7 +158,7 @@ class TestBatchConversion:
                 "from_unit": "invalid_unit",
                 "to_unit": "fahrenheit",
                 "conversion_type": "temperature",
-                "request_id": "invalid_unit_1"
+                "request_id": "invalid_unit_1",
             }
         ]
 
@@ -178,22 +177,22 @@ class TestBatchConversion:
                 "from_unit": "celsius",
                 "to_unit": "fahrenheit",
                 "conversion_type": "temperature",
-                "request_id": "success_1"
+                "request_id": "success_1",
             },
             {
                 "value": 100,
                 "from_unit": "invalid_unit",
                 "to_unit": "fahrenheit",
                 "conversion_type": "temperature",
-                "request_id": "failure_1"
+                "request_id": "failure_1",
             },
             {
                 "value": 1000,
                 "from_unit": "meter",
                 "to_unit": "kilometer",
                 "conversion_type": "length",
-                "request_id": "success_2"
-            }
+                "request_id": "success_2",
+            },
         ]
 
         results = convert_batch_tool(requests)
@@ -231,20 +230,90 @@ class TestBatchConversion:
     def test_all_conversion_types_supported(self):
         """Test that all conversion types are supported in batch processing."""
         requests = [
-            {"value": 90, "from_unit": "degrees", "to_unit": "radians", "conversion_type": "angle"},
-            {"value": 100, "from_unit": "square meter", "to_unit": "square foot", "conversion_type": "area"},
-            {"value": 1024, "from_unit": "bytes", "to_unit": "kilobytes", "conversion_type": "computer_data"},
-            {"value": 1000, "from_unit": "kilograms per cubic meter", "to_unit": "grams per cubic centimeter", "conversion_type": "density"},
-            {"value": 1000, "from_unit": "joule", "to_unit": "calorie", "conversion_type": "energy"},
-            {"value": 10, "from_unit": "newtons", "to_unit": "pounds force", "conversion_type": "force"},
-            {"value": 1000, "from_unit": "meter", "to_unit": "kilometer", "conversion_type": "length"},
-            {"value": 1000, "from_unit": "gram", "to_unit": "kilogram", "conversion_type": "mass"},
-            {"value": 1000, "from_unit": "watt", "to_unit": "kilowatt", "conversion_type": "power"},
-            {"value": 101325, "from_unit": "pascal", "to_unit": "atmosphere", "conversion_type": "pressure"},
-            {"value": 100, "from_unit": "kilometers per hour", "to_unit": "meters per second", "conversion_type": "speed"},
-            {"value": 0, "from_unit": "celsius", "to_unit": "kelvin", "conversion_type": "temperature"},
-            {"value": 3600, "from_unit": "seconds", "to_unit": "hours", "conversion_type": "time"},
-            {"value": 1000, "from_unit": "milliliter", "to_unit": "liter", "conversion_type": "volume"},
+            {
+                "value": 90,
+                "from_unit": "degrees",
+                "to_unit": "radians",
+                "conversion_type": "angle",
+            },
+            {
+                "value": 100,
+                "from_unit": "square meter",
+                "to_unit": "square foot",
+                "conversion_type": "area",
+            },
+            {
+                "value": 1024,
+                "from_unit": "bytes",
+                "to_unit": "kilobytes",
+                "conversion_type": "computer_data",
+            },
+            {
+                "value": 1000,
+                "from_unit": "kilograms per cubic meter",
+                "to_unit": "grams per cubic centimeter",
+                "conversion_type": "density",
+            },
+            {
+                "value": 1000,
+                "from_unit": "joule",
+                "to_unit": "calorie",
+                "conversion_type": "energy",
+            },
+            {
+                "value": 10,
+                "from_unit": "newtons",
+                "to_unit": "pounds force",
+                "conversion_type": "force",
+            },
+            {
+                "value": 1000,
+                "from_unit": "meter",
+                "to_unit": "kilometer",
+                "conversion_type": "length",
+            },
+            {
+                "value": 1000,
+                "from_unit": "gram",
+                "to_unit": "kilogram",
+                "conversion_type": "mass",
+            },
+            {
+                "value": 1000,
+                "from_unit": "watt",
+                "to_unit": "kilowatt",
+                "conversion_type": "power",
+            },
+            {
+                "value": 101325,
+                "from_unit": "pascal",
+                "to_unit": "atmosphere",
+                "conversion_type": "pressure",
+            },
+            {
+                "value": 100,
+                "from_unit": "kilometers per hour",
+                "to_unit": "meters per second",
+                "conversion_type": "speed",
+            },
+            {
+                "value": 0,
+                "from_unit": "celsius",
+                "to_unit": "kelvin",
+                "conversion_type": "temperature",
+            },
+            {
+                "value": 3600,
+                "from_unit": "seconds",
+                "to_unit": "hours",
+                "conversion_type": "time",
+            },
+            {
+                "value": 1000,
+                "from_unit": "milliliter",
+                "to_unit": "liter",
+                "conversion_type": "volume",
+            },
         ]
 
         results = convert_batch_tool(requests)
@@ -259,13 +328,15 @@ class TestBatchConversion:
         # Create 100 temperature conversions
         requests = []
         for i in range(100):
-            requests.append({
-                "value": i,
-                "from_unit": "celsius",
-                "to_unit": "fahrenheit",
-                "conversion_type": "temperature",
-                "request_id": f"temp_{i}"
-            })
+            requests.append(
+                {
+                    "value": i,
+                    "from_unit": "celsius",
+                    "to_unit": "fahrenheit",
+                    "conversion_type": "temperature",
+                    "request_id": f"temp_{i}",
+                }
+            )
 
         results = convert_batch_tool(requests)
 
@@ -274,7 +345,7 @@ class TestBatchConversion:
 
         # Verify a few random conversions
         assert results[0]["converted_value"] == 32.0  # 0°C = 32°F
-        assert results[100-1]["converted_value"] == 210.2  # 99°C = 210.2°F
+        assert results[100 - 1]["converted_value"] == 210.2  # 99°C = 210.2°F
 
     def test_request_id_preservation(self):
         """Test that request IDs are preserved in results."""
@@ -284,15 +355,15 @@ class TestBatchConversion:
                 "from_unit": "celsius",
                 "to_unit": "fahrenheit",
                 "conversion_type": "temperature",
-                "request_id": "custom_id_123"
+                "request_id": "custom_id_123",
             },
             {
                 "value": 1000,
                 "from_unit": "meter",
                 "to_unit": "kilometer",
                 "conversion_type": "length",
-                "request_id": "another_custom_id"
-            }
+                "request_id": "another_custom_id",
+            },
         ]
 
         results = convert_batch_tool(requests)
