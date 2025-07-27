@@ -22,6 +22,7 @@ from .tools import (
     VOLUME_UNIT,
     convert_angle_tool,
     convert_area_tool,
+    convert_batch_tool,
     convert_computer_data_tool,
     convert_density_tool,
     convert_energy_tool,
@@ -293,6 +294,43 @@ def convert_time(
         "converted_value": converted_value,
         "converted_unit": to_unit,
         "conversion_type": "time",
+    }
+
+
+@app.tool()
+def convert_batch(
+    requests: Annotated[
+        list[dict],
+        Field(
+            description="List of conversion requests. Each request should contain: value (float), from_unit (str), to_unit (str), conversion_type (str), and optionally request_id (str)"
+        ),
+    ]
+) -> dict:
+    """Perform multiple unit conversions in a single batch request.
+    
+    Each request in the batch should contain:
+    - value: The numeric value to convert
+    - from_unit: Source unit for conversion  
+    - to_unit: Target unit for conversion
+    - conversion_type: Type of conversion (temperature, length, mass, etc.)
+    - request_id: Optional identifier for tracking individual requests
+    
+    Returns a structured response with individual results for each conversion,
+    including success/failure status and either converted values or error messages.
+    """
+    results = convert_batch_tool(requests)
+
+    # Count successful and failed conversions
+    successful = sum(1 for result in results if result["success"])
+    failed = len(results) - successful
+
+    return {
+        "batch_results": results,
+        "summary": {
+            "total_requests": len(requests),
+            "successful_conversions": successful,
+            "failed_conversions": failed,
+        }
     }
 
 

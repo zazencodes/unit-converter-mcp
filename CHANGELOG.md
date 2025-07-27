@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.2] - 2025-07-27
+
+### Added
+- **New batch conversion tool**: `convert_batch` - Process multiple unit conversions in a single request
+  - Supports all 14 conversion types (temperature, length, mass, volume, angle, area, computer_data, density, energy, force, power, pressure, speed, time)
+  - Handles mixed success/failure scenarios with detailed error reporting
+  - Provides structured results with request tracking via optional `request_id` parameter
+  - Returns batch summary with counts of successful vs failed conversions
+  - Comprehensive test coverage including performance testing with 100+ conversions
+- **Enhanced documentation**: Updated README with improved examples and reorganized tool listing for better readability
+
+### Changed
+- **Updated tool exports**: Added batch conversion functionality to the main server and tool initialization
+- **Improved code organization**: Better type definitions and imports for batch processing functionality
+
 ## [0.1.1] - 2025-01-16
 
 ### Added

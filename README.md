@@ -6,6 +6,7 @@ Unit conversion utilities that provide precise conversions between different uni
 
 | Tool                    | Purpose                                    | Supported Units |
 | ----------------------- | ------------------------------------------ | --------------- |
+| `list_supported_units`  | List all supported units for each type    | All conversion types |
 | `convert_temperature`   | Convert temperature between units          | Celsius, Fahrenheit, Kelvin |
 | `convert_angle`         | Convert angle between units                | Degrees, Radians, Arcmin, Arcsec, Turns, Gons |
 | `convert_length`        | Convert length/distance between units      | Meter, Kilometer, Foot, Inch, Mile, etc. |
@@ -20,22 +21,25 @@ Unit conversion utilities that provide precise conversions between different uni
 | `convert_speed`         | Convert speed between units                | m/s, mph, km/h, knots, Mach, etc. |
 | `convert_computer_data` | Convert computer storage between units     | Bytes, KB, MB, GB, TB, etc. |
 | `convert_density`       | Convert density between units              | kg/L, g/cm³, lb/gal, g/L, etc. |
-| `list_supported_units`  | List all supported units for each type    | All conversion types |
 
 ## 🔧 Examples
 
 Here are some example prompts to get you started:
 
 ```text
-tell me what unit conversions you can do
+convert 0 celsius to fahrenheit
 
-convert 0 celcius to F
+what's my weight in kg? I'm 205lbs
 
-convert 3.14159 rads to degrees
+convert 3.14159 radians to degrees
 
-whats my weight in kg? I'm 205lbs
+convert the speed of a snail to Mach
 
-if I spend 10,000 seconds practicing a skill non-stop, how many days is that?
+how many floppy disks do you need to store 1TB?
+
+how much area would 1,000 mattresses take up in acres
+
+how many non-stop days would it take to watch Game of Thrones?
 ```
 
 
