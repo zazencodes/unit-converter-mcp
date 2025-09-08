@@ -370,7 +370,7 @@ def list_supported_units(
 
 def main() -> None:
     """Main entry point for the MCP server."""
-    app.run()
+    app.run(show_banner=False)
 
 
 if __name__ == "__main__":
